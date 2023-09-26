@@ -1,4 +1,4 @@
-name: Github Release
+name: Draft Github Release
 on:
   # Enable manual run
   workflow_dispatch:
@@ -111,6 +111,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.FLUTTERGALLERYRELEASEBOT_TOKEN }}
         with:
           upload_url: ${{ needs.draft-release.outputs.upload_url }}
-          asset_path: ./flutter_gallery_${{ matrix.target }}${{ matrix.asset_extension }}
-          asset_name: flutter_gallery_${{ matrix.target }}${{ matrix.asset_extension }}
+          asset_path: ./school_math_test${{ matrix.target }}${{ matrix.asset_extension }}
+          asset_name: school_math_test${{ matrix.target }}${{ matrix.asset_extension }}
           asset_content_type: ${{ matrix.asset_content_type }}
