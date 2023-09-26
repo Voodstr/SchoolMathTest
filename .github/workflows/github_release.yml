@@ -1,10 +1,10 @@
-name: Draft Github Release
+name: Github Release
 on:
   # Enable manual run
   workflow_dispatch:
     inputs:
       version:
-        description: "Tag to create (e.g. v2.10.0). Must include 'v' and must match pubspec"
+        description: "Tag to create (e.g. v1.0.0+1). Must include 'v' and must match pubspec"
         required: true
         default: "v1.0.0+1"
         type: string
@@ -57,12 +57,6 @@ jobs:
             build_path: build/linux/x64/release/bundle
             asset_extension: .tar.gz
             asset_content_type: application/gzip
-          - os: ubuntu-latest
-            target: Android
-            build_target: apk
-            build_path: build/app/outputs/flutter-apk
-            asset_extension: .apk
-            asset_content_type: application/vnd.android.package-archive
       # Disable fail-fast as we want results from all even if one fails.
       fail-fast: false
     needs: draft-release
@@ -92,36 +86,10 @@ jobs:
       - run: flutter create .
       - run: flutter pub get
 
-      - name: Configure Keystore for Android
-        if: matrix.target == 'Android'
-        run: |
-          echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
-          echo "storeFile=upload-keystore.jks" >> key.properties
-          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
-          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
-          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
-        env:
-          PLAY_STORE_UPLOAD_KEY: ${{ secrets.PLAY_STORE_UPLOAD_KEY }}
-          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
-          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
-          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
-        working-directory: android
-
       # Build the application.
       - run: flutter build -v ${{ matrix.build_target }} --release
 
       # Package the build.
-      - name: Copy VC redistributables to release directory for Windows
-        if: matrix.target == 'Windows'
-        run: |
-          Copy-Item (vswhere -latest -find 'VC\Redist\MSVC\*\x64\*\msvcp140.dll') .
-          Copy-Item (vswhere -latest -find 'VC\Redist\MSVC\*\x64\*\vcruntime140.dll') .
-          Copy-Item (vswhere -latest -find 'VC\Redist\MSVC\*\x64\*\vcruntime140_1.dll') .
-        working-directory: ${{ matrix.build_path }}
-      - name: Rename build for Android
-        if: matrix.target == 'Android'
-        run: mv app-release.apk $GITHUB_WORKSPACE/flutter_gallery_${{ matrix.target }}.apk
-        working-directory: ${{ matrix.build_path }}
       - name: Compress build for Linux
         if: matrix.target == 'Linux'
         run: tar czf $GITHUB_WORKSPACE/flutter_gallery_${{ matrix.target }}.tar.gz *
