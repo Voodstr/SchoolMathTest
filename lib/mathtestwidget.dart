@@ -63,7 +63,7 @@ class _StateMathTestWidget extends State<MathTestWidget> {
         ? Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Text("Тест закончен", textScaleFactor: 8.0),
+              const Text("Тест закончен", textScaleFactor: 5.0),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text("Длительность: ${widget.settingsData.duration} сек.   ",
                     textScaleFactor: 2.0),
@@ -74,14 +74,14 @@ class _StateMathTestWidget extends State<MathTestWidget> {
               ]),
               Text(
                   "Выполнен за: ${widget.settingsData.duration - _remainingTime} сек.",
-                  textScaleFactor: 5.0),
+                  textScaleFactor: 3.0),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     const Text(
                       "Верно:",
-                      textScaleFactor: 5.0,
+                      textScaleFactor: 3.0,
                     ),
                     Card(
                         color: Colors.lightGreen,
@@ -89,7 +89,7 @@ class _StateMathTestWidget extends State<MathTestWidget> {
                             Text(successful.toString(), textScaleFactor: 5.0)),
                     const Text(
                       "Ошибок: ",
-                      textScaleFactor: 5.0,
+                      textScaleFactor: 3.0,
                     ),
                     Card(
                         color: Colors.redAccent,
@@ -109,6 +109,7 @@ class _StateMathTestWidget extends State<MathTestWidget> {
                       textScaleFactor: 5.0,
                     ),
                   ),
+                  const Text(":",textScaleFactor: 6.0,),
                   Card(
                     child: Text(
                       seconds,

@@ -17,18 +17,18 @@ class SettingsWidget extends StatelessWidget {
     return  Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-           const Text("Настройки тестов",textScaleFactor: 3.0,),
+           const Card(child: Text("Настройки тестов",textScaleFactor: 3.0)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Flexible(child: Text("Длительность теста:")),
+              const Flexible(child: Text("Длительность теста:",textScaleFactor: 2.0)),
               Flexible(
                   child: DropdownMenu<String>(
                 controller: durationController,
                 hintText: "в секундах",
                 initialSelection: "30",
                 onSelected: (value) =>
-                    {settingsdData.duration = int.parse(value ?? "30")},
+                    {settingsdData.duration = int.parse(value ?? durationController.text)},
                 dropdownMenuEntries: ["30", "90", "180", "300", "600"]
                     .map<DropdownMenuEntry<String>>((String value) {
                   return DropdownMenuEntry<String>(
@@ -40,14 +40,14 @@ class SettingsWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Flexible(child: Text("Количество примеров:")),
+              const Flexible(child: Text("Количество примеров:",textScaleFactor: 2.0)),
               Flexible(
                   child: DropdownMenu<String>(
                 controller: questionsController,
                 hintText: "количество",
                 initialSelection: "5",
                 onSelected: (value) =>
-                    {settingsdData.questions = int.parse(value ?? "5")},
+                    {settingsdData.questions = int.parse(value ?? questionsController.text)},
                 dropdownMenuEntries: ["5", "10", "25", "50", "100"]
                     .map<DropdownMenuEntry<String>>((String value) {
                   return DropdownMenuEntry<String>(
@@ -59,14 +59,14 @@ class SettingsWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Flexible(child: Text("Порядок чисел:")),
+              const Flexible(child: Text("Порядок чисел:",textScaleFactor: 2.0)),
               Flexible(
                   child: DropdownMenu<String>(
                 controller: orderController,
                 hintText: "количество",
                 initialSelection: "1",
                 onSelected: (value) =>
-                    {settingsdData.order = int.parse(value ?? "1")},
+                    {settingsdData.order = int.parse(value ?? orderController.text)},
                 dropdownMenuEntries: ["1", "2", "3", "4", "5"]
                     .map<DropdownMenuEntry<String>>((String value) {
                   return DropdownMenuEntry<String>(
