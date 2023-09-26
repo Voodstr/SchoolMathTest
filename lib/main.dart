@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
             setup
                 ? ElevatedButton(
                     onPressed: () => {_saveSettings()},
-                    child: const Text("Начать тест"))
+                    child: const Text("Начать тест",textScaleFactor: 3.0,))
                 : const Text("")
           ],
         )
