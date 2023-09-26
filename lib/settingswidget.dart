@@ -25,14 +25,14 @@ class SettingsWidget extends StatelessWidget {
               Flexible(
                   child: DropdownMenu<String>(
                 controller: durationController,
-                hintText: "в секундах",
-                initialSelection: "30",
+                hintText: "сек.",
+                initialSelection: settingsdData.duration.toString(),
                 onSelected: (value) =>
                     {settingsdData.duration = int.parse(value ?? durationController.text)},
                 dropdownMenuEntries: ["30", "90", "180", "300", "600"]
                     .map<DropdownMenuEntry<String>>((String value) {
                   return DropdownMenuEntry<String>(
-                      value: value, label: "$value секунд");
+                      value: value, label: value);
                 }).toList(),
               ))
             ],
@@ -44,14 +44,14 @@ class SettingsWidget extends StatelessWidget {
               Flexible(
                   child: DropdownMenu<String>(
                 controller: questionsController,
-                hintText: "количество",
-                initialSelection: "5",
+                hintText: "кол.",
+                initialSelection: settingsdData.questions.toString(),
                 onSelected: (value) =>
                     {settingsdData.questions = int.parse(value ?? questionsController.text)},
                 dropdownMenuEntries: ["5", "10", "25", "50", "100"]
                     .map<DropdownMenuEntry<String>>((String value) {
                   return DropdownMenuEntry<String>(
-                      value: value, label: "$value примеров");
+                      value: value, label: value);
                 }).toList(),
               ))
             ],
@@ -63,14 +63,14 @@ class SettingsWidget extends StatelessWidget {
               Flexible(
                   child: DropdownMenu<String>(
                 controller: orderController,
-                hintText: "количество",
-                initialSelection: "1",
+                hintText: "кол.",
+                initialSelection: settingsdData.order.toString(),
                 onSelected: (value) =>
                     {settingsdData.order = int.parse(value ?? orderController.text)},
                 dropdownMenuEntries: ["1", "2", "3", "4", "5"]
                     .map<DropdownMenuEntry<String>>((String value) {
                   return DropdownMenuEntry<String>(
-                      value: value, label: "$value порядок");
+                      value: value, label: value);
                 }).toList(),
               ))
             ],
