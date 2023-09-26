@@ -37,7 +37,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        target: [macOS, Windows, Linux, Android]
+        target: [macOS, Windows, Linux]
         include:
           - os: macos-latest
             target: macOS
