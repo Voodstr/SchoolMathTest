@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Тесты по математике',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -55,9 +55,15 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
         actions: [
-          ElevatedButton(
-              onPressed: () => {_editSettings()},
-              child: const Icon(Icons.settings))
+          setup
+              ? Container(
+                  padding: const EdgeInsets.all(10),
+                  child: const Text("Настройки"))
+              : Container(
+                  padding: const EdgeInsets.all(10),
+                  child: ElevatedButton(
+                      onPressed: () => {_editSettings()},
+                      child: const Icon(Icons.settings)))
         ],
       ),
       body: body,
@@ -68,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
             setup
                 ? ElevatedButton(
                     onPressed: () => {_saveSettings()},
-                    child: const Text("Сохранить настройки"))
+                    child: const Text("Начать тест"))
                 : const Text("")
           ],
         )
